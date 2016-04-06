@@ -304,6 +304,8 @@ void Cellapp::finalise()
 
 	Spaces::finalise();
 	Navigation::getSingleton().finalise();
+	forward_messagebuffer_.clear();
+
 	EntityApp<Entity>::finalise();
 }
 
@@ -1850,9 +1852,9 @@ void Cellapp::reqTeleportToCellAppCB(Network::Channel* pChannel, MemoryStream& s
 	Position3D pos;
 	Direction3D dir;
 	ENTITY_SCRIPT_UID entityType;
-	SPACE_ID spaceID = 0, lastSpaceID = 0;
+	SPACE_ID lastSpaceID = 0;
 
-	s >> teleportEntityID >> nearbyMBRefID >> lastSpaceID >> spaceID;
+	s >> teleportEntityID >> nearbyMBRefID >> lastSpaceID;
 	s >> entityType;
 	s >> pos.x >> pos.y >> pos.z;
 	s >> dir.dir.x >> dir.dir.y >> dir.dir.z;
